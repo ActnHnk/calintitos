@@ -5,227 +5,51 @@
   <title>Welcome to CalinTitos</title>
   <!-- config -->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-  <meta name="csrf-param" content="authenticity_token">
-  <meta name="csrf-token" content="JalCp0zbMR16VQqRmJyHTorQY11sNCtU3nSYkCfJ449tzOHLTvRBNexqHEa5Hh0wIfsflhZE/l2O1GFM08kOgQ==">
   <meta name="viewport" content="width=device-width">
   <meta name="viewport" content="initial-scale=1.0">
-
   <!-- scripts  -->
-  <script src="application.js" data-turbolinks-track=" reload"></script>
-  <script defer src="scripts/firebase/auth.js"></script>
+  <script src="scripts/scripts.js" data-turbolinks-track=" reload"></script>
+  <!-- template includes -->
+  <!-- <script defer src="scripts/firebase/auth.js"></script> -->
   <script defer src="scripts/components/koi-component.js"></script>
   <script defer src="scripts/components/template/elements/koi-header.js"></script>
   <script defer src="scripts/components/template/elements/koi-nav.js"></script>
   <script defer src="scripts/components/template/elements/koi-main.js"></script>
   <script defer src="scripts/components/template/elements/koi-footer.js"></script>
   <script defer src="scripts/components/template/elements/koi-connection.js"></script>
-
+  <!-- restaurant includes -->
+  <script defer src="scripts/components/restaurant/cart/cart.js"></script>
+  <script defer src="scripts/components/restaurant/cart/cartItem.js"></script>
+  <script defer src="scripts/components/restaurant/menu/menu.js"></script>
+  <script defer src="scripts/components/restaurant/menu/menuItem.js"></script>
+  <script defer src="scripts/components/restaurant/inventory/inventory.js"></script>
+  <!-- styles -->
+  <link rel="stylesheet" href="styles/styles.css">
 </head>
-<style>
-  body {
-    background-image: url(images/fried-rice.jpg);
-  }
-
-  html {
-    font-size: 62.5%;
-    box-sizing: border-box;
-  }
-
-  *,
-  *::before,
-  *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
-  }
-
-  .place-order {
-    background-color: red;
-    border: 2px solid #ccc;
-    width: 100px;
-  }
-
-  .calculator {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background-color: grey;
-  }
-
-  .calculator-screen {
-    width: 100%;
-    font-size: 1rem;
-    height: 180px;
-    border: none;
-    background-color: white;
-    color: black;
-    text-align: left;
-    padding-right: 20px;
-    padding-left: 10px;
-  }
-
-.tab-screen{
-  width: 100%;
-  height:60px;
-
-  background-color: white;
-  color: black;
-
-}
-  button {
-    height: 60px;
-    background-color: #fff;
-    border-radius: 3px;
-    border: 1px solid #c4c4c4;
-    background-color: transparent;
-    font-size: 2rem;
-    color: #333;
-    background-image: linear-gradient(to bottom, transparent, transparent 50%, rgba(0, 0, 0, .04));
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), inset 0 1px 0 0 rgba(255, 255, 255, .45), inset 0 -1px 0 0 rgba(255, 255, 255, .15), 0 1px 0 0 rgba(255, 255, 255, .15);
-    text-shadow: 0 1px rgba(255, 255, 255, .4);
-  }
-
-  button:hover {
-    background-color: #eaeaea;
-  }
-
-
-  .calculator-keys {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
-    padding: 20px;
-  }
-</style>
-
-<script>
-  var tabCart = 0;
-    var menuItems = [];
-  var taco = {
-    'label': 'taco',
-    'price': 3,
-    'inventory': 10,
-    'mod': "",
-    'glutenFree' : true,
-    'uniqueIdentifier' : 1
-  };
-  var burrito = {
-    'label': 'burrito',
-    'price': 6,
-    'shell': 'soft',
-    'inventory': 1,
-    'mod': "",
-    'glutenFree' : false,
-    'uniqueIdentifier' : 0
-  };
-
-  function generateHash(menuItem){
-  let hash = Math.floor( Math.random()*10);
-   );
-  }
-
-  //this function takes an array and a json obj get passed
-  function removeItem(menuItems, menuItem){
-    let result;
-    let item = menuItems.find((element, index, array) => {
-      result = {
-        'index': index
-      };
-    });
-    menuItems.splice(result, 1);
-if(tabCart >= 0 ){
-    tabReduce(menuItem);
-   increaseInventory(menuItem);
-    renderOrder();
-  }
-    else
-    {
-      renderOrder();
-    }
-  };
-  //this function needs to tell the customer if 86
-  //push the passed json obj (the menuItem) to the array of menuItems
-  // look up the ordered items' prices and add them to tabCart,
-  //render the item on the screen
-  function addItem(menuItem){
-    if (menuItem.inventory == 0) {
-      render86();
-    } else {
-      menuItems.push(menuItem);
-      decreaseInventory(menuItem);
-      yourTab(menuItem);
-      renderOrder();
-      generateHash(menuItem);
-    }
-}
-
-  //
-  function tabReduce(item){
-    tabCart = tabCart - item.price;
-    if(tabCart<=0){
-      document.getElementById("yourTab").innerHTML = "your total is $" + 0;
-    }
-    else{
-    document.getElementById("yourTab").innerHTML = "your total is $" + tabCart
-  }
-  }
-
-
-  function yourTab(item){
-    tabCart = tabCart + item.price;
-    document.getElementById("yourTab").innerHTML = "your total is $" + tabCart;
-
-  }
-  //
-  function render86() {
-    document.getElementById("demo").value = "Out of Stock :(";
-  }
-
-  function renderOrder() {
-    document.getElementById("demo").value = JSON.stringify(menuItems);
-  }
-
-  function increaseInventory(orderedItem) {
-    //uses json to reduce the inventory attribute by one
-    orderedItem.inventory += 1;
-
-  }
-
-
-  function decreaseInventory(orderedItem) {
-    //uses json to reduce the inventory attribute by one
-    orderedItem.inventory -=1;
-
-  }
-
-  function sendItem() {
-    //sends the order to a database
-
-  }
-
-  function modOrder(foodMod){
-  window.open("https://www.w3schools.com");
-}
-
-function clearAll(){
-  document.getElementById("demo").value = ""
-  tabCount = 0;
-
-}
-
-</script>
 
 <body class="athelas">
-
   <koi-header>
     <h1 slot="title">Cali n Titos</h1>
   </koi-header>
-  <div class="calculator">
+  <div id="menu-page" class="menu-page">
+    <details id="menu-category" class="menu-category">
+      <summary>Lunch</summary>
+      <!-- menu items load here-->
+      <div class="menu-item" id="menu-item">
+        <div class="menu-text" id="menu-text">
+          <div class="label" id="label">LABEL</div>
+          <div class="description" id="description">DESCRIPTION</div>
+          <div class="price" id="price">PRICE</div>
+        </div>
+        <img class="thumbnail" src="https://res-3.cloudinary.com/upserve/image/upload/c_thumb,g_center,w_150,h_140,f_auto,q_auto:best,dpr_3.0/v1585753755/izlecb2ky6qvpba2qmjq.jpg" alt="THE FARMER thumbnail">
+      </div>
+    </details>
+    <div id="cart" class="cart">
+      <!-- cart info here -->
+    </div>
+  </div>
+
+  <!-- <div class="calculator">
     <textarea class="calculator-screen" id="demo" disabled ></textarea>
     <div class="calculator-keys">
       <button type="button" onclick="addItem(taco)">taco</button>
@@ -236,13 +60,8 @@ function clearAll(){
       <button type="button" onclick"canIeat(document.getElementById("demo"))">Can I eat?</button>
       <button type="button" class="place-order" onclick="sendItem()">place order</button>
       <textarea class = "tab-screen" id="yourTab" disabled></textarea>
-
     </div>
-
-  </div>
-  </article>
-  </div>
+  </div> -->
 </body>
-<koi-footer></koi-footer>
 
 </html>
