@@ -1,4 +1,4 @@
-  var inventory = {
+var inventory = {
   'taco': 10,
   'burrito': 5,
   'ceviche': 15

@@ -20,6 +20,7 @@
   <!-- restaurant includes -->
   <script defer src="scripts/components/restaurant/cart/cart.js"></script>
   <script defer src="scripts/components/restaurant/cart/cartItem.js"></script>
+<<<<<<< HEAD
   <script defer src="scripts/components/restaurant/menu/menuItem.js"></script>
   <script defer src="scripts/components/restaurant/menu/menu.js"></script>
   <script defer src="scripts/components/restaurant/menu/menuManager.js"></script>
@@ -28,6 +29,11 @@
   <script defer src="scripts/components/restaurant/inventory/inventory.js"></script>
 
 
+=======
+  <script defer src="scripts/components/restaurant/menu/menu.js"></script>
+  <script defer src="scripts/components/restaurant/menu/menuItem.js"></script>
+  <script defer src="scripts/components/restaurant/inventory/inventory.js"></script>
+>>>>>>> de652c3486f805a179ed1dd5340d456ac06b4eeb
   <!-- styles -->
   <link rel="stylesheet" href="styles/styles.css">
 </head>
@@ -36,9 +42,43 @@
   <koi-header>
     <h1 slot="title">Cali n Titos</h1>
   </koi-header>
+<<<<<<< HEAD
   <restaraunt-menu></restaraunt-menu>
 
 
+=======
+  <div id="menu-page" class="menu-page">
+    <details id="menu-category" class="menu-category">
+      <summary>Lunch</summary>
+      <!-- menu items load here-->
+      <div class="menu-item" id="menu-item">
+        <div class="menu-text" id="menu-text">
+          <div class="label" id="label">LABEL</div>
+          <div class="description" id="description">DESCRIPTION</div>
+          <div class="price" id="price">PRICE</div>
+        </div>
+        <img class="thumbnail" src="https://res-3.cloudinary.com/upserve/image/upload/c_thumb,g_center,w_150,h_140,f_auto,q_auto:best,dpr_3.0/v1585753755/izlecb2ky6qvpba2qmjq.jpg" alt="THE FARMER thumbnail">
+      </div>
+    </details>
+    <div id="cart" class="cart">
+      <!-- cart info here -->
+    </div>
+  </div>
+
+  <!-- <div class="calculator">
+    <textarea class="calculator-screen" id="demo" disabled ></textarea>
+    <div class="calculator-keys">
+      <button type="button" onclick="addItem(taco)">taco</button>
+      <button type="button" onclick="addItem(burrito)">burrito</button>
+      <button type="button" onclick="removeItem(menuItems,taco)">remove</button>
+      <button type="button" onclick"modOrder())">Modify</button>
+      <button type="button" onclick"clearAll(document.getElementById("demo"))">clear</button>
+      <button type="button" onclick"canIeat(document.getElementById("demo"))">Can I eat?</button>
+      <button type="button" class="place-order" onclick="sendItem()">place order</button>
+      <textarea class = "tab-screen" id="yourTab" disabled></textarea>
+    </div>
+  </div> -->
+>>>>>>> de652c3486f805a179ed1dd5340d456ac06b4eeb
 </body>
 
 </html>
