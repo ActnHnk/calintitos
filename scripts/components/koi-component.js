@@ -56,6 +56,12 @@ class KoiComponent extends HTMLElement {
   set respStatus(e) {
     this._state= e;
   }
+  get host() {
+    return this._host;
+  }
+  set host(e) {
+    this._host= e;
+  }
   //// temp is our wc html ////
   constructor() {
     super();
@@ -70,19 +76,21 @@ class KoiComponent extends HTMLElement {
   //// NATIVE COMPONENT FUNCTIONS ////
   ////LIFE CYCLE FUNCTION HELPERS ////
   async initialize(tag, temp){
-    //this tells the browser to render the contents and not the wrapper for accessibility reasons
+
     this._setAttribute('role', 'presentation');
-    // Initialize shady styles
-    this.updateShadyStyles();
+    // Initialize shady styles w/ polyfill
+    window.ShadyCSS && window.ShadyCSS.styleElement(this);
     if (!this.shadowRoot) {
       // create shadow tree
       var shadow = this.attachShadow({
         mode: 'open'
       });
     }
-    let t = document.createElement('template');
-    t.innerHTML = temp;
-    return t;
+    if(this.template && this.template.content){
+      this.shadowRoot.appendChild(this.template.content.cloneNode(true));
+      // cache useful shadow selectors
+    }
+    this.host = this.getRootNode().host;
   }
   //// END LIFE CYCLE FUNCTIONS ////
   //// END NATIVE COMPONENT FUNCTIONS ////
