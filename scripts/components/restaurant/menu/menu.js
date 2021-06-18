@@ -7,7 +7,7 @@ let menuItemTemplate = {
   'description': ''
 }
 //put all menu items into menuItem array for front-end
-var menuItems = [farmer, taco, ceviche, burrito];
+var globalMenuItems = [farmer, taco, ceviche, burrito];
 
 const restarauntMenu = 'restaraunt-menu';
 class RestarauntMenu extends KoiComponent {
@@ -35,9 +35,15 @@ class RestarauntMenu extends KoiComponent {
   set tempPrice(e) {
     this._tempPrice = e;
   }
-
+  get menuItems() {
+    return this._menuItems;
+  }
+  set menuItems(e) {
+    this._menuItems = e;
+  }
   constructor() {
     super();
+    this.menuItems = globalMenuItems;
     this.tag = restarauntMenu;
     this.template.innerHTML = `
     <style>
@@ -102,7 +108,7 @@ button:hover {
 
   render() {
     let htmlString = "";
-    for (let menuItem of menuItems) {
+    for (let menuItem of this.menuItems) {
       htmlString += `
     <div class="menu-item" id="menu-item">
       <div class="menu-text" id="menu-text">

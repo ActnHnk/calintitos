@@ -125,6 +125,17 @@ class KoiComponent extends HTMLElement {
     if (koiState) {
       console.log('localStorage data for for state: ');
       console.log(koiState);
+      let keys = path.split('/');
+      let table = keys[0];
+      let prop = keys[1];
+      if(table && koiState[table]){
+        console.log('Reading from table '+table);
+        if(prop && koiState[table][prop]){
+          console.log('Reading from key '+prop);
+          return koiState[table][prop];
+        }
+      }
+      console.log('Could not read '+table+'/'+prop+' from mpp object:');
       return koiState;
     } else {
       console.log('No State data stored locally in this Koifrog project.');
