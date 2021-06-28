@@ -75,8 +75,7 @@ class KoiComponent extends HTMLElement {
   }
   //// NATIVE COMPONENT FUNCTIONS ////
   ////LIFE CYCLE FUNCTION HELPERS ////
-  async initialize(tag, temp){
-
+  async initialize(){
     this._setAttribute('role', 'presentation');
     // Initialize shady styles w/ polyfill
     window.ShadyCSS && window.ShadyCSS.styleElement(this);
@@ -96,19 +95,8 @@ class KoiComponent extends HTMLElement {
   //// END NATIVE COMPONENT FUNCTIONS ////
   connectedCallback() {
     //this tells the browser to render the contents and not the wrapper for accessibility reasons
-    this.setAttribute('role', 'presentation');
+    this.initialize();
     // Initialize shady styles if needed
-    this.updateShadyStyles();
-    if (!this.shadowRoot) {
-      // create shadow tree
-      this.attachShadow({
-        mode: 'open'
-      });
-      if(this.template){
-        this.shadowRoot.appendChild(this.template.content.cloneNode(true));
-        // cache useful shadow selectors
-      }
-    }
     this.selectElements();
   }
   //// WRAPPERS ////
@@ -266,6 +254,13 @@ class KoiComponent extends HTMLElement {
       }
     });
     return success;
+  }
+  createElement(elem, tag){
+    let node = document.createElement(elem);
+    node.id = tag;
+    node.addClass(tag);
+    node.name = tag;
+    return node;
   }
   //// END  WRAPPERS ////
   //// TO BE BOUND TO INDIVIDUAL INPUTS ////

@@ -11,30 +11,6 @@ var globalMenuItems = [farmer, taco, ceviche, burrito];
 
 const restarauntMenu = 'restaraunt-menu';
 class RestarauntMenu extends KoiComponent {
-  get tempLabel() {
-    return this._tempLabel;
-  }
-  set tempLabel(e) {
-    this._tempLabel = e;
-  }
-  get tempDescription() {
-    return this._tempDescription;
-  }
-  set tempDescription(e) {
-    this._tempDescription = e;
-  }
-  get tempPhotoUrl() {
-    return this._tempPhotoUrl;
-  }
-  set tempPhotoUrl(e) {
-    this._tempPhotoUrl = e;
-  }
-  get tempPrice() {
-    return this._tempPrice;
-  }
-  set tempPrice(e) {
-    this._tempPrice = e;
-  }
   get menuItems() {
     return this._menuItems;
   }
